@@ -589,48 +589,6 @@ function fmt(n){ return '$' + n.toLocaleString('es-CL'); }
 
 
 renderGrid('todo');
-    countEl.textContent = '';
-    return;
-  }
-
-  // Filter products by search query
-  const results = productos.filter(p =>
-    p.nombre.toLowerCase().includes(q) ||
-    p.cat.toLowerCase().includes(q) ||
-    p.desc.toLowerCase().includes(q)
-  );
-
-  // Remove active from category buttons
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-
-  if(results.length === 0) {
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--mid);">
-      <div style="font-size:2.5rem;margin-bottom:1rem;">🔍</div>
-      <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--accent);">Sin resultados</div>
-      <div style="font-size:0.8rem;margin-top:0.5rem;">No encontramos productos para "<strong>${query}</strong>"</div>
-    </div>`;
-    countEl.textContent = 'Sin resultados para "' + query + '"';
-    return;
-  }
-
-  countEl.textContent = results.length + ' producto' + (results.length !== 1 ? 's' : '') + ' encontrado' + (results.length !== 1 ? 's' : '') + ' para "' + query + '"';
-
-  grid.innerHTML = results.map((p, i) => `
-    <div class="card" style="animation-delay:${i*0.05}s;position:relative;" onclick="abrirModal(${p.id})">
-      ${p.badge ? `<div style="position:absolute;top:8px;left:8px;background:${p.badge==='NUEVO'?'var(--accent)':'#ff4444'};color:#000;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:0.2rem 0.5rem;z-index:2;">${p.badge}</div>` : ''}
-      <div class="card-img">${getCardImg(p)}</div>
-      <div class="card-body">
-        <div class="card-cat">${p.cat}</div>
-        <div class="card-name">${p.nombre}</div>
-        <div class="card-desc">${p.desc.substring(0,60)}...</div>
-        <div class="card-footer">
-          <span class="price">${fmt(p.precio)}</span>
-          <button class="add-btn" onclick="event.stopPropagation();agregar(${p.id})">+ Agregar</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
 
 
 
