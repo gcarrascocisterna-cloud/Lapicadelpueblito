@@ -38,7 +38,63 @@
     .hero-btn { display:inline-block; background:var(--accent); color:#000; padding:0.7rem 2.2rem; font-family:"Cinzel Decorative",sans-serif; font-size:1rem; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; transition:background 0.2s,transform 0.2s; }
     .hero-btn:hover { background:var(--accent2); transform:translateY(-2px); }
 
-    /* CATEGORIES */
+    /* SEARCH BAR */
+.search-container {
+  background: var(--dark);
+  padding: 1.5rem 1.5rem 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #000;
+  border: 1.5px solid var(--accent);
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: "Jost", sans-serif;
+  font-size: 0.9rem;
+  padding: 0.7rem 1rem;
+  letter-spacing: 0.05em;
+}
+
+.search-box input::placeholder {
+  color: #444;
+  font-weight: 300;
+}
+
+.search-box button {
+  background: var(--accent);
+  border: none;
+  color: #000;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-box button:hover { background: var(--accent2); }
+
+.search-results-count {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--mid);
+  padding: 0.5rem;
+  letter-spacing: 0.1em;
+  background: var(--dark);
+}
+
+/* CATEGORIES */
     .categories { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; padding:2rem 1.5rem 0.8rem; background:var(--dark); }
     .cat-btn { background:transparent; border:1px solid #333; color:var(--mid); padding:0.4rem 1.1rem; font-family:"Jost",sans-serif; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; border-radius:2px; }
     .cat-btn.active, .cat-btn:hover { background:var(--accent); border-color:var(--accent); color:#000; font-weight:600; }
@@ -114,7 +170,117 @@
     .checkout-btn { width:100%; background:var(--accent); color:#000; border:none; padding:0.8rem; font-family:"Cinzel Decorative",sans-serif; font-size:1rem; letter-spacing:0.15em; cursor:pointer; transition:background 0.2s; }
     .checkout-btn:hover { background:var(--accent2); }
 
-    /* CONTACTO */
+    /* CARRUSEL */
+.carousel-section {
+  background: #000;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.carousel-title {
+  text-align: center;
+  font-family: "Cinzel Decorative", serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.carousel-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-track-wrapper::before,
+.carousel-track-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.carousel-track-wrapper::before {
+  left: 0;
+  background: linear-gradient(90deg, #000, transparent);
+}
+
+.carousel-track-wrapper::after {
+  right: 0;
+  background: linear-gradient(-90deg, #000, transparent);
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+  animation: scrollCarousel 30s linear infinite;
+  width: max-content;
+}
+
+.carousel-track:hover { animation-play-state: paused; }
+
+@keyframes scrollCarousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-item {
+  width: 160px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.carousel-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.carousel-item-img {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  background: var(--light);
+  overflow: hidden;
+}
+
+.carousel-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-item-body {
+  padding: 0.6rem 0.7rem;
+}
+
+.carousel-item-name {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 0.55rem;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carousel-item-price {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+/* CONTACTO */
     .contacto { background:#000; color:var(--text); padding:3rem 1.5rem; text-align:center; border-top:2px solid var(--accent); }
     .contacto h3 { font-family:"Cinzel Decorative",sans-serif; font-size:1.8rem; letter-spacing:0.08em; margin-bottom:0.4rem; }
     .contacto p { font-size:0.82rem; color:var(--mid); font-weight:300; margin-bottom:1.2rem; }
@@ -159,21 +325,51 @@
 </section>
 
 <section id="productos" style="background:var(--dark);">
-  <div class="categories">
-    <button class="cat-btn active" onclick="filtrar('todo', this)">Todos</button>
-    <button class="cat-btn" onclick="filtrar('tabaco', this)">Tabaco</button>
-    <button class="cat-btn" onclick="filtrar('parafernalia', this)">Parafernalia</button>
-    <button class="cat-btn" onclick="filtrar('piercing', this)">Piercing</button>
-    <button class="cat-btn" onclick="filtrar('ropa', this)">Ropa</button>
-    <button class="cat-btn" onclick="filtrar('gafas', this)">Gafas</button>
-    <button class="cat-btn" onclick="filtrar('baile', this)">Trajes Típicos</button>
-    <button class="cat-btn" onclick="filtrar('serigrafia', this)">🎨 Serigrafía</button>
+  <div class="search-container">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 Buscar producto... (ej: polera, tabaco, piercing)" oninput="buscar(this.value)">
+      <button onclick="buscar(document.getElementById('searchInput').value)">🔍</button>
+    </div>
   </div>
+  <div id="searchCount" class="search-results-count"></div>
+  <div class="categories">
+    <button class="cat-btn active" onclick="filtrar('todo', this)" data-cat="todo">Todos</button>
+    <button class="cat-btn" onclick="filtrar('tabaco', this)" data-cat="tabaco">Tabaco</button>
+    <button class="cat-btn" onclick="filtrar('parafernalia', this)" data-cat="parafernalia">Parafernalia</button>
+    <button class="cat-btn" onclick="filtrar('piercing', this)" data-cat="piercing">Piercing</button>
+    <button class="cat-btn" onclick="filtrar('ropa', this)" data-cat="ropa">Ropa</button>
+    <button class="cat-btn" onclick="filtrar('gafas', this)" data-cat="gafas">Gafas</button>
+    <button class="cat-btn" onclick="filtrar('baile', this)" data-cat="baile">Trajes Típicos</button>
+    <button class="cat-btn" onclick="filtrar('serigrafia', this)" data-cat="serigrafia">🎨 Serigrafía</button>
+  </div>
+  <!-- BUSCADOR -->
+  <div style="padding:0.8rem 1.5rem;background:var(--dark);display:flex;justify-content:center;">
+    <div style="width:100%;max-width:500px;position:relative;">
+      <input id="buscador" type="text" placeholder="🔍 Buscar producto..." oninput="buscar(this.value)"
+        style="width:100%;background:#1a1a1a;border:1.5px solid #333;color:var(--text);padding:0.7rem 1rem 0.7rem 1rem;font-family:'Jost',sans-serif;font-size:0.9rem;outline:none;border-radius:2px;transition:border-color 0.2s;"
+        onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#333'">
+      <button onclick="limpiarBusqueda()" id="clearBtn"
+        style="display:none;position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--mid);font-size:1.1rem;cursor:pointer;">✕</button>
+    </div>
+  </div>
+  <div id="sinResultados" style="display:none;text-align:center;padding:3rem 1rem;background:var(--dark);">
+    <div style="font-size:2rem;margin-bottom:0.5rem;">🔍</div>
+    <div style="font-family:'Cinzel Decorative',serif;color:var(--mid);font-size:1rem;">Sin resultados</div>
+    <div style="font-size:0.8rem;color:#555;margin-top:0.3rem;">Intenta con otro término</div>
+  </div>
+
   <div class="section-title">
     <h2>Nuestros Productos</h2>
     <p>Toca cualquier producto para ver más detalles y fotos</p>
   </div>
   <div class="products" id="grid"></div>
+</section>
+
+<section class="carousel-section">
+  <div class="carousel-title">✦ Nuestros Productos ✦</div>
+  <div class="carousel-track-wrapper">
+    <div class="carousel-track" id="carouselTrack"></div>
+  </div>
 </section>
 
 <section class="contacto" id="contacto">
@@ -449,6 +645,138 @@ let productoActual = null;
 let fotoActualIdx = 0;
 
 function fmt(n){ return '$' + n.toLocaleString('es-CL'); }
+
+function buscar(query) {
+  const q = query.toLowerCase().trim();
+  const grid = document.getElementById('grid');
+  const countEl = document.getElementById('searchCount');
+  
+  // Reset category buttons
+  if(q === '') {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.cat-btn').classList.add('active');
+    // Build carousel
+function buildCarousel() {
+  const track = document.getElementById('carouselTrack');
+  if (!track) return;
+  
+  // Use all products, duplicate for infinite scroll
+  const items = [...productos, ...productos];
+  
+  track.innerHTML = items.map(p => `
+    <div class="carousel-item" onclick="abrirModal(${p.id})">
+      <div class="carousel-item-img">
+        ${p.fotos && p.fotos.length > 0 
+          ? `<img src="${p.fotos[0]}" alt="${p.nombre}" loading="lazy">`
+          : p.emoji}
+      </div>
+      <div class="carousel-item-body">
+        <div class="carousel-item-name">${p.nombre}</div>
+        <div class="carousel-item-price">${fmt(p.precio)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+buildCarousel();
+renderGrid('todo');
+    countEl.textContent = '';
+    return;
+  }
+
+  // Filter products by search query
+  const results = productos.filter(p =>
+    p.nombre.toLowerCase().includes(q) ||
+    p.cat.toLowerCase().includes(q) ||
+    p.desc.toLowerCase().includes(q)
+  );
+
+  // Remove active from category buttons
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+
+  if(results.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--mid);">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🔍</div>
+      <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--accent);">Sin resultados</div>
+      <div style="font-size:0.8rem;margin-top:0.5rem;">No encontramos productos para "<strong>${query}</strong>"</div>
+    </div>`;
+    countEl.textContent = 'Sin resultados para "' + query + '"';
+    return;
+  }
+
+  countEl.textContent = results.length + ' producto' + (results.length !== 1 ? 's' : '') + ' encontrado' + (results.length !== 1 ? 's' : '') + ' para "' + query + '"';
+
+  grid.innerHTML = results.map((p, i) => `
+    <div class="card" style="animation-delay:${i*0.05}s;position:relative;" onclick="abrirModal(${p.id})">
+      ${p.badge ? `<div style="position:absolute;top:8px;left:8px;background:${p.badge==='NUEVO'?'var(--accent)':'#ff4444'};color:#000;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:0.2rem 0.5rem;z-index:2;">${p.badge}</div>` : ''}
+      <div class="card-img">${getCardImg(p)}</div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat}</div>
+        <div class="card-name">${p.nombre}</div>
+        <div class="card-desc">${p.desc.substring(0,60)}...</div>
+        <div class="card-footer">
+          <span class="price">${fmt(p.precio)}</span>
+          <button class="add-btn" onclick="event.stopPropagation();agregar(${p.id})">+ Agregar</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function buscar(query){
+  const btn = document.getElementById('clearBtn');
+  btn.style.display = query.length > 0 ? 'block' : 'none';
+  
+  const q = query.toLowerCase().trim();
+  const grid = document.getElementById('grid');
+  const sinRes = document.getElementById('sinResultados');
+  
+  if(!q){
+    // Reset to current category
+    const activeBtn = document.querySelector('.cat-btn.active');
+    const cat = activeBtn ? activeBtn.getAttribute('data-cat') : 'todo';
+    renderGrid(cat);
+    sinRes.style.display = 'none';
+    return;
+  }
+  
+  const results = productos.filter(p => 
+    p.nombre.toLowerCase().includes(q) || 
+    p.cat.toLowerCase().includes(q) || 
+    p.desc.toLowerCase().includes(q)
+  );
+  
+  if(results.length === 0){
+    grid.innerHTML = '';
+    sinRes.style.display = 'block';
+  } else {
+    sinRes.style.display = 'none';
+    grid.innerHTML = results.map((p,i) => `
+      <div class="card" style="animation-delay:${i*0.05}s;position:relative;" onclick="abrirModal(${p.id})">
+        ${p.badge ? `<div style="position:absolute;top:8px;left:8px;background:${p.badge==='NUEVO'?'var(--accent)':'#ff4444'};color:#000;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:0.2rem 0.5rem;z-index:2;">${p.badge}</div>` : ''}
+        <div class="card-img">${getCardImg(p)}</div>
+        <div class="card-body">
+          <div class="card-cat">${p.cat}</div>
+          <div class="card-name">${p.nombre}</div>
+          <div class="card-desc">${p.desc.substring(0,60)}...</div>
+          <div class="card-footer">
+            <span class="price">${fmt(p.precio)}</span>
+            <button class="add-btn" onclick="event.stopPropagation();agregar(${p.id})">+ Agregar</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function limpiarBusqueda(){
+  document.getElementById('buscador').value = '';
+  document.getElementById('clearBtn').style.display = 'none';
+  document.getElementById('sinResultados').style.display = 'none';
+  const activeBtn = document.querySelector('.cat-btn.active');
+  const cat = activeBtn ? activeBtn.getAttribute('data-cat') : 'todo';
+  renderGrid(cat);
+}
 
 function getCardImg(p){
   if(p.fotos && p.fotos.length > 0){
