@@ -657,7 +657,6 @@ function buildCarousel() {
 }
 
 renderGrid('todo');
-buildCarousel();
     countEl.textContent = '';
     return;
   }
@@ -921,6 +920,7 @@ function enviarBuzon(){
   document.getElementById('nombreBuzon').value = '';
   toast('✓ Mensaje enviado');
 }
+buildCarousel();
 </script>
 </body>
 </html>
