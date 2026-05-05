@@ -67,32 +67,10 @@
   padding: 0.7rem 1rem;
   letter-spacing: 0.05em;
 }
-
-.search-box input::placeholder {
-  color: #444;
-  font-weight: 300;
-}
-
-.search-box button {
-  background: var(--accent);
-  border: none;
-  color: #000;
-  padding: 0.7rem 1.2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
+.search-box input::placeholder { color: #444; font-weight: 300; }
+.search-box button { background: var(--accent); border: none; color: #000; padding: 0.7rem 1.2rem; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
 .search-box button:hover { background: var(--accent2); }
-
-.search-results-count {
-  text-align: center;
-  font-size: 0.72rem;
-  color: var(--mid);
-  padding: 0.5rem;
-  letter-spacing: 0.1em;
-  background: var(--dark);
-}
+.search-results-count { text-align: center; font-size: 0.72rem; color: var(--mid); padding: 0.5rem; letter-spacing: 0.1em; background: var(--dark); }
 
 /* CATEGORIES */
     .categories { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; padding:2rem 1.5rem 0.8rem; background:var(--dark); }
@@ -324,6 +302,13 @@
   </div>
 </section>
 
+<section class="carousel-section">
+  <div class="carousel-title">✦ Todos Nuestros Productos ✦</div>
+  <div class="carousel-track-wrapper">
+    <div class="carousel-track" id="carouselTrack"></div>
+  </div>
+</section>
+
 <section id="productos" style="background:var(--dark);">
   <div class="search-container">
     <div class="search-box">
@@ -363,13 +348,6 @@
     <p>Toca cualquier producto para ver más detalles y fotos</p>
   </div>
   <div class="products" id="grid"></div>
-</section>
-
-<section class="carousel-section">
-  <div class="carousel-title">✦ Nuestros Productos ✦</div>
-  <div class="carousel-track-wrapper">
-    <div class="carousel-track" id="carouselTrack"></div>
-  </div>
 </section>
 
 <section class="contacto" id="contacto">
@@ -678,8 +656,8 @@ function buildCarousel() {
   `).join('');
 }
 
-buildCarousel();
 renderGrid('todo');
+buildCarousel();
     countEl.textContent = '';
     return;
   }
