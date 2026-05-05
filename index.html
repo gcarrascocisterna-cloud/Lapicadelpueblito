@@ -116,62 +116,7 @@
     .checkout-btn { width:100%; background:var(--accent); color:#000; border:none; padding:0.8rem; font-family:"Cinzel Decorative",sans-serif; font-size:1rem; letter-spacing:0.15em; cursor:pointer; transition:background 0.2s; }
     .checkout-btn:hover { background:var(--accent2); }
 
-    /* CARRUSEL */
-.carousel-section {
-  background: #000;
-  padding: 2rem 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-}
-
-.carousel-title {
-  text-align: center;
-  font-family: "Cinzel Decorative", serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-bottom: 1.2rem;
-}
-
-.carousel-track-wrapper {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-}
-
-.carousel-track-wrapper::before,
-.carousel-track-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 60px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.carousel-track-wrapper::before {
-  left: 0;
-  background: linear-gradient(90deg, #000, transparent);
-}
-
-.carousel-track-wrapper::after {
-  right: 0;
-  background: linear-gradient(-90deg, #000, transparent);
-}
-
-.carousel-track {
-  display: flex;
-  gap: 1rem;
-  animation: scrollCarousel 30s linear infinite;
-  width: max-content;
-}
-
-.carousel-track:hover { animation-play-state: paused; }
-
-@keyframes scrollCarousel {
-  0% { transform: translateX(0); }
+    
   100% { transform: translateX(-50%); }
 }
 
@@ -245,7 +190,89 @@
       .card-img{height:120px;font-size:2.5rem;}
       .gallery-main{height:220px;}
     }
-  </style>
+  
+    /* ===== CARRUSEL ===== */
+    .carrusel-wrap {
+      background: #000;
+      padding: 1.5rem 0;
+      border-top: 1px solid #2a2a2a;
+      border-bottom: 1px solid #2a2a2a;
+      overflow: hidden;
+      position: relative;
+    }
+    .carrusel-titulo {
+      text-align: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      color: #7fff00;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-family: "Cinzel Decorative", serif;
+    }
+    .carrusel-outer {
+      overflow: hidden;
+      position: relative;
+    }
+    .carrusel-outer::before,
+    .carrusel-outer::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 50px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .carrusel-outer::before { left: 0; background: linear-gradient(to right, #000, transparent); }
+    .carrusel-outer::after  { right: 0; background: linear-gradient(to left, #000, transparent); }
+    .carrusel-inner {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      animation: mover 35s linear infinite;
+    }
+    .carrusel-inner:hover { animation-play-state: paused; }
+    @keyframes mover {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .carrusel-card {
+      width: 150px;
+      flex-shrink: 0;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .carrusel-card:hover { border-color: #7fff00; transform: translateY(-3px); }
+    .carrusel-card-img {
+      width: 150px;
+      height: 120px;
+      overflow: hidden;
+      background: #1c1c1c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .carrusel-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .carrusel-card-info { padding: 0.5rem 0.6rem; }
+    .carrusel-card-nombre {
+      font-size: 0.58rem;
+      color: #ddd;
+      font-family: "Jost", sans-serif;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0.2rem;
+    }
+    .carrusel-card-precio {
+      font-size: 0.7rem;
+      color: #7fff00;
+      font-family: "Cinzel Decorative", serif;
+    }
+    /* ===== FIN CARRUSEL ===== */
+</style>
 </head>
 <body>
 
@@ -270,12 +297,13 @@
   </div>
 </section>
 
-<section class="carousel-section">
-  <div class="carousel-title">✦ Todos Nuestros Productos ✦</div>
-  <div class="carousel-track-wrapper">
-    <div class="carousel-track" id="carouselTrack"></div>
+
+<div class="carrusel-wrap">
+  <div class="carrusel-titulo">✦ Nuestros Productos ✦</div>
+  <div class="carrusel-outer">
+    <div class="carrusel-inner" id="carruselInner"></div>
   </div>
-</section>
+</div>
 
 <section id="productos" style="background:var(--dark);">
   
@@ -766,7 +794,25 @@ function enviarBuzon(){
   document.getElementById('nombreBuzon').value = '';
   toast('✓ Mensaje enviado');
 }
-buildCarousel();
+// Carrusel
+(function() {
+  var items = productos.map(function(p) {
+    var img = p.fotos && p.fotos.length > 0
+      ? '<img src="' + p.fotos[0] + '" alt="' + p.nombre + '">'
+      : p.emoji;
+    return '<div class="carrusel-card" onclick="abrirModal(' + p.id + ')">'
+      + '<div class="carrusel-card-img">' + img + '</div>'
+      + '<div class="carrusel-card-info">'
+      + '<div class="carrusel-card-nombre">' + p.nombre + '</div>'
+      + '<div class="carrusel-card-precio">' + fmt(p.precio) + '</div>'
+      + '</div></div>';
+  });
+  // Duplicate for infinite loop
+  var html = items.join('') + items.join('');
+  var el = document.getElementById('carruselInner');
+  if(el) el.innerHTML = html;
+})();
+
 </script>
 </body>
 </html>
